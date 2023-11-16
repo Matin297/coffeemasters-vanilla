@@ -12,6 +12,10 @@ const router = {
     });
 
     this.go(location.pathname);
+
+    window.addEventListener("popstate", (event) => {
+      this.go(event.state.route, false);
+    });
   },
   go(route, addToHistory = true) {
     console.log(`going to ${route}`);
