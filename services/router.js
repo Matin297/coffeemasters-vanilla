@@ -29,7 +29,6 @@ const router = {
     switch (route) {
       case "/":
         pageElement = document.createElement("menu-page");
-        pageElement.textContent = "Home";
         break;
 
       case "/order":
