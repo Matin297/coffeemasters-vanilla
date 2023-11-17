@@ -28,13 +28,21 @@ const router = {
 
     switch (route) {
       case "/":
-        pageElement = document.createElement("h1");
+        pageElement = document.createElement("menu-page");
         pageElement.textContent = "Home";
         break;
 
       case "/order":
-        pageElement = document.createElement("h1");
-        pageElement.textContent = "Orders";
+        pageElement = document.createElement("order-page");
+        break;
+
+      default:
+        if (route.startsWith("/product-")) {
+          pageElement = document.createElement("details-page");
+          pageElement.dataset.productId = route.substring(
+            route.lastIndexOf("-") + 1
+          );
+        }
         break;
     }
 
