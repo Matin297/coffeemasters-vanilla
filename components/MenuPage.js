@@ -1,12 +1,13 @@
 export default class MenuPage extends HTMLElement {
   constructor() {
     super();
-  }
 
-  connectedCallback() {
+    this.root = this.attachShadow({ mode: "open" });
+
     const template = document.getElementById("menu-page-template");
     const content = template.content.cloneNode(true);
-    this.append(content);
+
+    this.root.append(content);
   }
 }
 
