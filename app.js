@@ -5,6 +5,7 @@ import { loadData } from "./services/menu.js";
 import DetailsPage from "./components/DetailsPage.js";
 import MenuPage from "./components/MenuPage.js";
 import OrderPage from "./components/OrderPage.js";
+import ProductItem from "./components/ProductItem.js";
 
 window.coffee_app = {};
 coffee_app.store = store;

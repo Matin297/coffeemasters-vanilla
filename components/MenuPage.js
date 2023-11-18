@@ -35,6 +35,12 @@ export default class MenuPage extends HTMLElement {
           <ul class='category'></ul>
         `;
         menuListElement.append(categoryElement);
+
+        category.products.forEach((product) => {
+          const productElement = document.createElement("product-item");
+          productElement.dataset.product = JSON.stringify(product);
+          categoryElement.querySelector("ul.category").append(productElement);
+        });
       });
     } else {
       menuListElement.innerHTML = "Loading...";
