@@ -16,6 +16,30 @@ export default class MenuPage extends HTMLElement {
 
     this.root.append(style, content);
   }
+
+  connectedCallback() {
+    window.addEventListener("menuchange", () => this.render());
+  }
+
+  render() {
+    const menu = coffee_app.store.menu;
+
+    const menuListElement = this.root.getElementById("menu");
+    menuListElement.innerHTML = "";
+
+    if (menu) {
+      menu.forEach((category) => {
+        const categoryElement = document.createElement("li");
+        categoryElement.innerHTML = `
+          <h3>${category.name}</h3>
+          <ul class='category'></ul>
+        `;
+        menuListElement.append(categoryElement);
+      });
+    } else {
+      menuListElement.innerHTML = "Loading...";
+    }
+  }
 }
 
 customElements.define("menu-page", MenuPage);
