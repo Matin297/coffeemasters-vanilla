@@ -1,4 +1,5 @@
 import API from "../services/api.js";
+import { getProductById } from "../services/menu.js";
 
 export default class DetailsPage extends HTMLElement {
   constructor() {
@@ -15,6 +16,39 @@ export default class DetailsPage extends HTMLElement {
     const content = template.content.cloneNode(true);
 
     this.root.append(style, content);
+  }
+
+  connectedCallback() {
+    this.render();
+  }
+
+  async render() {
+    const category = this.dataset.category;
+    const productId = this.dataset.productId;
+
+    if (category && productId) {
+      const product = await getProductById(category, Number(productId));
+
+      if (!product) {
+        return alert("No such product found!");
+      }
+
+      this.root.querySelector("h2").textContent = product.name;
+      this.root.querySelector("p.description").textContent =
+        product.description;
+      this.root.querySelector(
+        "p.price"
+      ).textContent = `$${product.price.toFixed(2)}`;
+
+      this.root.querySelector("img").src = `/data/images/${product.image}`;
+
+      this.root.querySelector("button").addEventListener("click", () => {
+        // TODO addToCart(this.product.id);
+        coffee_app.router.go("/order");
+      });
+    } else {
+      alert("Product ID or category id missing");
+    }
   }
 }
 

@@ -5,7 +5,7 @@ export async function loadData() {
   coffee_app.store.menu = menuData;
 }
 
-export async function getProductById(category_name, product_id) {
+export async function getProductById(category_name, productId) {
   if (coffee_app.store.menu === null) {
     await loadData();
   }
@@ -16,9 +16,7 @@ export async function getProductById(category_name, product_id) {
 
   if (!category) return null;
 
-  const product = category.products.find(
-    (product) => product.id === product_id
-  );
+  const product = category.products.find((product) => product.id === productId);
 
   if (!product) return null;
 
