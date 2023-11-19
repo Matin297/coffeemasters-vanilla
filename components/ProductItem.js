@@ -25,5 +25,3 @@ export default class ProductItem extends HTMLElement {
     });
   }
 }
-
-customElements.define("product-item", ProductItem);

@@ -17,5 +17,3 @@ export default class OrderPage extends HTMLElement {
     this.root.append(style, content);
   }
 }
-
-customElements.define("order-page", OrderPage);
