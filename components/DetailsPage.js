@@ -1,5 +1,6 @@
 import API from "../services/api.js";
 import { getProductById } from "../services/menu.js";
+import { addToCart } from "../services/order.js";
 
 export default class DetailsPage extends HTMLElement {
   constructor() {
@@ -43,7 +44,7 @@ export default class DetailsPage extends HTMLElement {
       this.root.querySelector("img").src = `/data/images/${product.image}`;
 
       this.root.querySelector("button").addEventListener("click", () => {
-        // TODO addToCart(this.product.id);
+        addToCart(product);
         coffee_app.router.go("/order");
       });
     } else {

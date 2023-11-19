@@ -1,3 +1,5 @@
+import { addToCart } from "../services/order.js";
+
 export default class ProductItem extends HTMLElement {
   constructor() {
     super();
@@ -16,7 +18,7 @@ export default class ProductItem extends HTMLElement {
     this.querySelector("img").src = `data/images/${product.image}`;
     this.querySelector("a").addEventListener("click", (event) => {
       if (event.target.tagName.toLowerCase() === "button") {
-        // TODO
+        addToCart(product);
       } else {
         coffee_app.router.go(`/product-${product.id}/${category}`);
       }
