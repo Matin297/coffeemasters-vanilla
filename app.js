@@ -17,3 +17,13 @@ window.addEventListener("DOMContentLoaded", () => {
   coffee_app.router.init();
   loadData();
 });
+
+window.addEventListener("cartchange", () => {
+  const badge = document.getElementById("badge");
+  const cartLength = coffee_app.store.cart.reduce(
+    (acc, { quantity }) => acc + quantity,
+    0
+  );
+  badge.textContent = cartLength;
+  badge.hidden = cartLength === 0;
+});
