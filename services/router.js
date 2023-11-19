@@ -38,9 +38,10 @@ const router = {
       default:
         if (route.startsWith("/product-")) {
           pageElement = document.createElement("details-page");
-          pageElement.dataset.productId = route.substring(
-            route.lastIndexOf("-") + 1
-          );
+          const [_, product, category] = route.split("/");
+
+          pageElement.dataset.category = category;
+          pageElement.dataset.productId = product.split("-")[1];
         }
         break;
     }

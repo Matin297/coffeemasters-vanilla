@@ -38,6 +38,7 @@ export default class MenuPage extends HTMLElement {
 
         category.products.forEach((product) => {
           const productElement = document.createElement("product-item");
+          productElement.dataset.category = category.name;
           productElement.dataset.product = JSON.stringify(product);
           categoryElement.querySelector("ul.category").append(productElement);
         });

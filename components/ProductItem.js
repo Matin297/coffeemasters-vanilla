@@ -9,6 +9,7 @@ export default class ProductItem extends HTMLElement {
     this.append(content);
 
     const product = JSON.parse(this.dataset.product);
+    const category = this.dataset.category;
 
     this.querySelector("h4").textContent = product.name;
     this.querySelector("p.price").textContent = `$${product.price.toFixed(2)}`;
@@ -17,7 +18,7 @@ export default class ProductItem extends HTMLElement {
       if (event.target.tagName.toLowerCase() === "button") {
         // TODO
       } else {
-        coffee_app.router.go(`/product-${product.id}`);
+        coffee_app.router.go(`/product-${product.id}/${category}`);
       }
     });
   }
