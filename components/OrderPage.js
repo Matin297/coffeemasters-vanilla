@@ -1,6 +1,12 @@
 import API from "../services/api.js";
 
 export default class OrderPage extends HTMLElement {
+  #order = {
+    name: "",
+    phone: "",
+    email: "",
+  };
+
   constructor() {
     super();
 
@@ -39,6 +45,18 @@ export default class OrderPage extends HTMLElement {
       const content = template.content.cloneNode(true);
       section.append(content);
 
+      const form = section.querySelector("form");
+
+      this.setFormBindings(form);
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        alert(`${this.#order.name}, your order was placed successfully!`);
+        this.#order.name = "";
+        this.#order.phone = "";
+        this.#order.email = "";
+      });
+
       const cartList = section.querySelector("ul");
       cart.forEach((cartItem) => {
         const cartListItem = document.createElement("cart-item");
@@ -57,5 +75,21 @@ export default class OrderPage extends HTMLElement {
       `;
       cartList.append(totalPriceElement);
     }
+  }
+
+  setFormBindings(form) {
+    this.#order = new Proxy(this.#order, {
+      set(target, property, value) {
+        target[property] = value;
+        form.elements[property].value = value;
+        return true;
+      },
+    });
+
+    Array.from(form.elements).forEach((element) => {
+      element.addEventListener("change", (event) => {
+        this.#order[event.target.name] = event.target.value;
+      });
+    });
   }
 }
