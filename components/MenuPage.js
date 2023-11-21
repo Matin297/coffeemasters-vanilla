@@ -19,6 +19,7 @@ export default class MenuPage extends HTMLElement {
 
   connectedCallback() {
     window.addEventListener("menuchange", () => this.render());
+    this.render();
   }
 
   render() {
