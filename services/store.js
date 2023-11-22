@@ -8,11 +8,11 @@ const storeProxy = new Proxy(store, {
     target[property] = value;
 
     if (property === "menu") {
-      window.dispatchEvent(new Event("menuchange"));
+      window.dispatchEvent(new CustomEvent("menuchange"));
     }
 
     if (property === "cart") {
-      window.dispatchEvent(new Event("cartchange"));
+      window.dispatchEvent(new CustomEvent("cartchange"));
     }
 
     return true;
