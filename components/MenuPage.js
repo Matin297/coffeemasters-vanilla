@@ -4,7 +4,7 @@ export default class MenuPage extends HTMLElement {
   constructor() {
     super();
 
-    this.root = this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: "open" });
 
     const style = document.createElement("style");
     API.fetchCSS("MenuPage").then((styles) => {
@@ -14,7 +14,7 @@ export default class MenuPage extends HTMLElement {
     const template = document.getElementById("menu-page-template");
     const content = template.content.cloneNode(true);
 
-    this.root.append(style, content);
+    this.shadowRoot.append(style, content);
   }
 
   connectedCallback() {
@@ -25,7 +25,7 @@ export default class MenuPage extends HTMLElement {
   render() {
     const menu = coffee_app.store.menu;
 
-    const menuListElement = this.root.getElementById("menu");
+    const menuListElement = this.shadowRoot.getElementById("menu");
     menuListElement.innerHTML = "";
 
     if (menu) {

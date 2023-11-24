@@ -10,7 +10,7 @@ export default class OrderPage extends HTMLElement {
   constructor() {
     super();
 
-    this.root = this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: "open" });
 
     const style = document.createElement("style");
     API.fetchCSS("OrderPage").then((styles) => {
@@ -19,7 +19,7 @@ export default class OrderPage extends HTMLElement {
 
     const section = document.createElement("section");
 
-    this.root.append(style, section);
+    this.shadowRoot.append(style, section);
   }
 
   connectedCallback() {
@@ -30,7 +30,7 @@ export default class OrderPage extends HTMLElement {
   }
 
   render() {
-    const section = this.root.querySelector("section");
+    const section = this.shadowRoot.querySelector("section");
     const cart = coffee_app.store.cart;
 
     if (cart.length === 0) {

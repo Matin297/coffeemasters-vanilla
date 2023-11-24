@@ -6,7 +6,7 @@ export default class DetailsPage extends HTMLElement {
   constructor() {
     super();
 
-    this.root = this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: "open" });
 
     const style = document.createElement("style");
     API.fetchCSS("DetailsPage").then((styles) => {
@@ -16,7 +16,7 @@ export default class DetailsPage extends HTMLElement {
     const template = document.getElementById("details-page-template");
     const content = template.content.cloneNode(true);
 
-    this.root.append(style, content);
+    this.shadowRoot.append(style, content);
   }
 
   connectedCallback() {
@@ -34,16 +34,18 @@ export default class DetailsPage extends HTMLElement {
         return alert("No such product found!");
       }
 
-      this.root.querySelector("h2").textContent = product.name;
-      this.root.querySelector("p.description").textContent =
+      this.shadowRoot.querySelector("h2").textContent = product.name;
+      this.shadowRoot.querySelector("p.description").textContent =
         product.description;
-      this.root.querySelector(
+      this.shadowRoot.querySelector(
         "p.price"
       ).textContent = `$${product.price.toFixed(2)}`;
 
-      this.root.querySelector("img").src = `/data/images/${product.image}`;
+      this.shadowRoot.querySelector(
+        "img"
+      ).src = `/data/images/${product.image}`;
 
-      this.root.querySelector("button").addEventListener("click", () => {
+      this.shadowRoot.querySelector("button").addEventListener("click", () => {
         addToCart(product);
         coffee_app.router.go("/order");
       });
