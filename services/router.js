@@ -28,6 +28,7 @@ const router = {
 
     switch (route) {
       case "/":
+      case "/index.html":
         pageElement = document.createElement("menu-page");
         break;
 
